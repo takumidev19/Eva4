@@ -20,6 +20,6 @@ from reservasApp.views import ReservasList, ReservasDetail
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('ReservasAPI/', ReservasList.as_view()),
-    path('ReservasAPI/<int:pk>/', ReservasDetail.as_view()),
+    path('ReservasAPI/', ReservasList.as_view(), name='reservas-list'),
+    path('ReservasAPI/<int:pk>/', ReservasDetail.as_view(), name='reservas-detail'),
 ]

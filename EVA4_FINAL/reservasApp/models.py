@@ -2,14 +2,21 @@ from django.db import models
 
 # Create your models here.
 class Reserva(models.Model):
+    ESTADO_OPCIONES = [
+        ('RESERVADO', 'Reservado'),
+        ('COMPLETADA', 'Completada'),
+        ('ANULADA', 'Anulada'),
+        ('NO_ASISTEN', 'No Asisten'),
+    ]
+
     ID = models.AutoField(primary_key=True)
-    nombre_cliente = models.CharField(max_length=50)
-    telefono_cliente = models.CharField(max_length=20)
-    fecha_reserva = models.DateField()
-    fecha_reserva_hora = models.TimeField()
-    cantidad_clientes = models.IntegerField()
-    estado_reserva = models.CharField(max_length=20)
-    observaciones = models.CharField(max_length=100)
+    nombre_cliente = models.CharField(max_length=50)  # Nombre de quien realiza la reserva
+    telefono_cliente = models.CharField(max_length=20)  # Teléfono de contacto
+    fecha_reserva = models.DateField()  # Fecha de la reserva
+    hora_reserva = models.TimeField()  # Hora de la reserva
+    cantidad_clientes = models.IntegerField()  # Cantidad de personas
+    estado_reserva = models.CharField(max_length=15, choices=ESTADO_OPCIONES)  # Estado de la reserva
+    observaciones = models.CharField(max_length=100, blank=True, null=True)  # Observaciones (no requerido)
 
     def __str__(self):
-        return self.nombre_cliente
+        return f"Reserva {self.ID} - {self.nombre_cliente} ({self.estado_reserva})"
