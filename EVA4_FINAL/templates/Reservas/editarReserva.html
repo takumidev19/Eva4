@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}Restaurante Gourmet - Editar Reserva{% endblock %}
+
+{% block content %}
+<div class="container mt-5 py-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card bg-dark text-light border-0 shadow-lg">
+                <div class="card-header bg-darker text-center">
+                    <h1 class="mb-0">Editar Reserva</h1>
+                </div>
+                <div class="card-body">
+                    <form method="post" action="{% url 'editar-reserva' pk=reserva.id %}">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="nombre_cliente" class="form-label">Nombre Cliente</label>
+                            <input type="text" class="form-control bg-secondary text-light border-0" id="nombre_cliente" name="nombre_cliente" value="{{ reserva.nombre_cliente }}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="telefono_cliente" class="form-label">Teléfono Cliente</label>
+                            <input type="text" class="form-control bg-secondary text-light border-0" id="telefono_cliente" name="telefono_cliente" value="{{ reserva.telefono_cliente }}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="fecha_reserva" class="form-label">Fecha Reserva</label>
+                            <input type="date" class="form-control bg-secondary text-light border-0" id="fecha_reserva" name="fecha_reserva" value="{{ reserva.fecha_reserva }}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="hora_reserva" class="form-label">Hora Reserva</label>
+                            <input type="time" class="form-control bg-secondary text-light border-0" id="hora_reserva" name="hora_reserva" value="{{ reserva.hora_reserva }}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="cantidad_clientes" class="form-label">Cantidad de Clientes</label>
+                            <input type="number" class="form-control bg-secondary text-light border-0" id="cantidad_clientes" name="cantidad_clientes" value="{{ reserva.cantidad_clientes }}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="estado_reserva" class="form-label">Estado Reserva</label>
+                            <select class="form-select bg-secondary text-light border-0" id="estado_reserva" name="estado_reserva" required>
+                                <option value="RESERVADO" {% if reserva.estado_reserva == 'RESERVADO' %}selected{% endif %} class="bg-dark">Reservado</option>
+                                <option value="COMPLETADA" {% if reserva.estado_reserva == 'COMPLETADA' %}selected{% endif %} class="bg-dark">Completada</option>
+                                <option value="ANULADA" {% if reserva.estado_reserva == 'ANULADA' %}selected{% endif %} class="bg-dark">Anulada</option>
+                                <option value="NO_ASISTEN" {% if reserva.estado_reserva == 'NO_ASISTEN' %}selected{% endif %} class="bg-dark">No Asisten</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="observaciones" class="form-label">Observaciones</label>
+                            <textarea class="form-control bg-secondary text-light border-0" id="observaciones" name="observaciones" rows="3">{{ reserva.observaciones }}</textarea>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-custom btn-outline-primary">Guardar Cambios</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

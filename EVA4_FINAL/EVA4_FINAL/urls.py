@@ -16,10 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from reservasApp.views import ReservasList, ReservasDetail
+from reservasApp.views import ReservasList, ReservasDetail, index, agregarReserva, editarReserva, eliminarReserva, verReservas
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('', index, name='index'),
+    path('verReservas/', verReservas, name='ver-reservas'),
+    path('agregarReserva/', agregarReserva, name='agregar-reserva'),
+    path('editarReserva/<int:pk>/', editarReserva, name='editar-reserva'),
+    path('eliminarReserva/<int:pk>/', eliminarReserva, name='eliminar-reserva'),
+    path('admin/', admin.site.urls, name='admin'),
     path('ReservasAPI/', ReservasList.as_view(), name='reservas-list'),
     path('ReservasAPI/<int:pk>/', ReservasDetail.as_view(), name='reservas-detail'),
 ]

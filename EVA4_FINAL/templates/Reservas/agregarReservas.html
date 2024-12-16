@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}Restaurante Gourmet - Agregar Reserva{% endblock %}
+
+{% block content %}
+<div class="container mt-5 py-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card bg-dark text-light border-0 shadow-lg">
+                <div class="card-header bg-darker text-center">
+                    <h1 class="mb-0">Formulario de Reserva</h1>
+                </div>
+                <div class="card-body">
+                    <form method="post" action="{% url 'agregar-reserva' %}">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="nombre_cliente" class="form-label">Nombre</label>
+                            <input type="text" class="form-control bg-secondary text-light border-0" id="nombre_cliente" name="nombre_cliente" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="telefono_cliente" class="form-label">Teléfono</label>
+                            <input type="text" class="form-control bg-secondary text-light border-0" id="telefono_cliente" name="telefono_cliente" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="fecha_reserva" class="form-label">Fecha</label>
+                            <input type="date" class="form-control bg-secondary text-light border-0" id="fecha_reserva" name="fecha_reserva" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="hora_reserva" class="form-label">Hora</label>
+                            <input type="time" class="form-control bg-secondary text-light border-0" id="hora_reserva" name="hora_reserva" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="cantidad_clientes" class="form-label">Cantidad Clientes</label>
+                            <input type="number" class="form-control bg-secondary text-light border-0" id="cantidad_clientes" name="cantidad_clientes" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="estado_reserva" class="form-label">Estado</label>
+                            <select class="form-select bg-secondary text-light border-0" id="estado_reserva" name="estado_reserva" required>
+                                <option value="" class="bg-dark">Selecciona un estado</option>
+                                <option value="RESERVADO" class="bg-dark">Reservado</option>
+                                <option value="COMPLETADA" class="bg-dark">Completada</option>
+                                <option value="ANULADA" class="bg-dark">Anulada</option>
+                                <option value="NO_ASISTEN" class="bg-dark">No Asisten</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="observaciones" class="form-label">Observaciones</label>
+                            <textarea class="form-control bg-secondary text-light border-0" id="observaciones" name="observaciones" rows="3"></textarea>
+                        </div>
+                        {% if messages %}
+                        <div class="alert alert-danger">
+                            <ul>
+                                {% for message in messages %}
+                                    <li>{{ message }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        {% endif %}
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-custom btn-outline-success">Agregar Reserva</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

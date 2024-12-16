@@ -16,3 +16,9 @@ class ReservaSerializer(serializers.ModelSerializer):
         if value not in estados_validos:
             raise serializers.ValidationError(f"El estado '{value}' no es válido. Los estados permitidos son: {', '.join(estados_validos)}.")
         return value
+    
+    def validate_observaciones(self, value):
+        # Si 'observaciones' está vacío o solo tiene espacios, devolver 'none'
+        if value is None or not value.strip():
+            return 'none'
+        return value
